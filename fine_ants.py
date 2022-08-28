@@ -23,10 +23,10 @@ def export(data):
 
 # gets the first and last debit item from the debit column and then finds the total
 def add_debit(data):
-    recent_deb = data["Debit"][0]
-    oldest_deb = data["Debit"][len(data)-1]
-    recent_deb_date = data["Date"][0]
-    oldest_deb_date = data["Date"][len(data)-1]
+    rc = 0
+    oc = len(data)-1
+    recent_deb = data["Debit"][rc]
+    oldest_deb = data["Debit"][oc]
 
     while math.isnan(recent_deb):
         rc = rc + 1
@@ -35,6 +35,9 @@ def add_debit(data):
     while math.isnan(oldest_deb):
         oc = oc - 1
         oldest_deb = data["Debit"][oc]
+
+    recent_deb_date = data["Date"][rc]
+    oldest_deb_date = data["Date"][oc]
 
     print(
         f"**Debit:\nmost recent: ${recent_deb}\t{recent_deb_date}\noldest: ${oldest_deb}\t{oldest_deb_date}\n")
@@ -47,7 +50,6 @@ def add_debit(data):
 def add_credit(data):
     rc = 0
     oc = len(data)-1
-    print(rc, oc)
     recent_cre = data["Credit"][rc]
     oldest_cre = data["Credit"][oc]
 
